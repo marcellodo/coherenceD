@@ -1,3 +1,31 @@
+#' Compare quantiles of the presumed same variables but estimated 
+#' from two different samples
+#'
+#' @param x1 numeric vector with values observed on data source 1
+#' @param x2 numeric vector with values observed on data source 2
+#' @param w1 optional numeric vector with weights associated to data 
+#' from data source 1 (typically survey weights in case of a probabilistic 
+#' sample survey)
+#' @param w2 optional numeric vector with weights associated to data 
+#' from data source 2 (typically survey weights in case of a probabilistic 
+#' sample survey)
+#' @param pctp percentage points, i.e. a vector or ordered values between 0 and 1
+#' @param ref logical (default is FALSE), if TRUE the quantile estimated on the second data source 
+#' are considered as the 'reference' ones (i.e. the most reliable estimate)
+#' @param lambda1 a single value between 0 and 1 providing the coefficient used 
+#' to pool x1 and x2 (i.e. c(x1, x2)) and the corresponding weights (i.e. c(w1,w2))
+#' to obtaine a larger data source used to estimate the reference quantiles. 
+#' Only used when ref = FALSE and w1 and w2 are provided (i.e. the data come from
+#' two probabilistic sample surveys)
+#' @param ... addditional arguments that may be required by functions called 
+#' by this function, e.g. wtd.qs
+#'
+#' @return a data frame with the estimated quantiles and their difference and 
+#' relative difference wrt the reference estimate
+#' @export
+#'
+#' @examples
+#' 
 comp.quantiles <- function (x1, x2, w1 = NULL, 
           w2 = NULL, pctp=c(0.25,0.50,0.75), 
           ref = FALSE, lambda1=NULL, ...) 
